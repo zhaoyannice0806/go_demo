@@ -9,5 +9,9 @@ func main() {
 
 	// testStructDemo()
 
-	testConstDemo()
+	//testConstDemo()
+
+	// testIfConditionDemo(2)
+
+	testSwitchDemo(5)
 }
