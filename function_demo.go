@@ -30,6 +30,7 @@ func cal(a, b int) (sum, product int) {
 	return
 }
 
+// 可变参数
 func sum(numbers ...int) int {
 	var total int
 	for _, num := range numbers {
@@ -38,6 +39,34 @@ func sum(numbers ...int) int {
 	return total
 }
 
+// 闭包
+func makeCounter() func() int {
+	num := 0
+	return func() int {
+		num++
+		return num
+	}
+}
+
+// 函数柯里化
+func addCurrying(x int) func(y int) int {
+	return func(y int) int {
+		return x + y
+	}
+}
+
 func testFunctionDemo() {
-	fmt.Printf("%d\n", sum(1, 2))
+	fmt.Printf("%d\n", sum(1, 2, 4, 5, 6))
+
+	fmt.Println("===========闭包==================")
+	counter := makeCounter()
+	fmt.Println(counter())
+	fmt.Println(counter())
+	fmt.Println(counter())
+
+	fmt.Println("===========函数柯里化==================")
+	add := addCurrying(1)
+	fmt.Println(add(2))
+	fmt.Println(add(3))
+	fmt.Println(addCurrying(4)(4))
 }
