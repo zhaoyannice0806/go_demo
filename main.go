@@ -13,5 +13,7 @@ func main() {
 
 	// testIfConditionDemo(2)
 
-	testSwitchDemo(5)
+	// testSwitchDemo(5)
+
+	testFunctionDemo()
 }

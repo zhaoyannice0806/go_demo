@@ -1,3 +1,3 @@
 module go_demo
 
-go 1.22.11
+go 1.21.7
