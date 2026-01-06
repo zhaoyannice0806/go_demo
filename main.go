@@ -15,5 +15,7 @@ func main() {
 
 	// testSwitchDemo(5)
 
-	testFunctionDemo()
+	// testFunctionDemo()
+
+	testDeferDemo()
 }
