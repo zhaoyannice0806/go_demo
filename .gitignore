@@ -1,1 +1,5 @@
 .vscode/launch.json
+.idea/go_demo.iml
+.idea/modules.xml
+.idea/watcherTasks.xml
+.idea/vcs.xml
