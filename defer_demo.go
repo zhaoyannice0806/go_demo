@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"sync"
+)
 
 // defer 在ruturn之后执行
 func exmple() int {
@@ -36,10 +40,41 @@ func deferValue() {
 	fmt.Println("函数内值", i)
 }
 
+// 最终释放资源
+func readFile() error {
+	file, err := os.Open("..test.log")
+	if err != nil {
+		return err
+	}
+
+	defer file.Close()
+	return nil
+}
+
+// 互斥锁
+func lockDemo() {
+	var mu sync.Mutex
+	defer mu.Unlock()
+	mu.Lock()
+}
+
+func recoverDemo() {
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("捕获异常:", err)
+		}
+	}()
+	panic("发生错误")
+}
+
 func testDeferDemo() {
 	exmple()
 	// panicExmple()
 	multipleDefer()
 
 	deferValue()
+
+	lockDemo()
+
+	recoverDemo()
 }
