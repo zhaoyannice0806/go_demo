@@ -19,5 +19,7 @@ func main() {
 
 	// testDeferDemo()
 
-	testTypeConversionDemo()
+	// testTypeConversionDemo()
+
+	testSliceDemo()
 }
