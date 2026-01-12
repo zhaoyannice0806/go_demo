@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-// ============Demo 01================
+// ============Demo 01 基础语法================
 type Animal interface {
 	Bark() string
 }
@@ -27,7 +29,7 @@ func makeSound(animal Animal) {
 	fmt.Println(animal.Bark())
 }
 
-// ============Demo 02================
+// ============Demo 02 隐式实现================
 type Runner interface {
 	run()
 }
@@ -48,7 +50,7 @@ func (p Person) eat() {
 	fmt.Println(p.Name + "在吃饭")
 }
 
-// ============Demo 03================
+// ============Demo 03 空接口================
 func PrintfAnyValue(v interface{}) {
 	switch val := v.(type) {
 	case int:
@@ -60,6 +62,56 @@ func PrintfAnyValue(v interface{}) {
 	default:
 		fmt.Printf("未知类型:%T\n", val)
 	}
+}
+
+// ============Demo 03 接口嵌套================
+
+type Reader interface {
+	read()
+}
+
+type Writer interface {
+	write()
+}
+
+type ReadWriter interface {
+	Reader
+	Writer
+}
+
+type File struct {
+	path string
+}
+
+func (f File) read() {
+	fmt.Println(f.path + ": File.read")
+}
+
+func (f File) write() {
+	fmt.Println(f.path + ": File.write")
+}
+
+// ============Demo 04 接口断言================
+
+type Shape interface {
+	Area() float64
+}
+
+type Circle struct {
+	radius float64
+}
+
+func (c Circle) Area() float64 {
+	return 3.14 * c.radius * c.radius
+}
+
+type Rectangle struct {
+	width  float64
+	height float64
+}
+
+func (r Rectangle) Area() float64 {
+	return r.width * r.height
 }
 
 func testInterfaceDemo() {
@@ -83,4 +135,30 @@ func testInterfaceDemo() {
 	PrintfAnyValue("AA")
 	PrintfAnyValue(true)
 	PrintfAnyValue(3.1555)
+
+	var rw File = File{path: "xxx"}
+	rw.read()
+	rw.write()
+
+	circle := Circle{radius: 5.0}
+
+	switch shape := interface{}(circle).(type) {
+	case Circle:
+		fmt.Println("Circle:", shape.Area())
+	case Rectangle:
+		fmt.Println("Rectangle:", shape.Area())
+	default:
+		fmt.Println("Unknown shape")
+	}
+
+	rectangle := Rectangle{width: 5.0, height: 10.0}
+
+	switch shape := interface{}(rectangle).(type) {
+	case Circle:
+		fmt.Println("Circle:", shape.Area())
+	case Rectangle:
+		fmt.Println("Rectangle:", shape.Area())
+	default:
+		fmt.Println("Unknown shape")
+	}
 }
