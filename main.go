@@ -22,4 +22,6 @@ func main() {
 	// testTypeConversionDemo()
 
 	testPointerDemo()
+
+	testSliceDemo()
 }
