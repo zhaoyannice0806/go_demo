@@ -25,5 +25,7 @@ func main() {
 
 	// testSliceDemo()
 
-	testInterfaceDemo()
+	// testInterfaceDemo()
+
+	testSelectGoroutineDemo()
 }
